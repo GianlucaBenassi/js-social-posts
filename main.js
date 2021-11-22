@@ -72,13 +72,11 @@ const btnLike = document.querySelectorAll('.js-like-button');
 
 for (let i = 0; i < btnLike.length; i++) {
 
-    const {id, likes} = posts[i];
-
     btnLike[i].addEventListener('click', function(event){
         event.preventDefault();
         
         // call onLike function
-        onLike(id, likes);
+        onLike(this, i);
 
     });
 
@@ -181,6 +179,20 @@ function addPost(id, content, media, name, image, likes, created) {
 
 // increase/decrease like number
 
-function onLike (id, likes) {
-    console.log('hai premuto like sul post con id', id, 'e con questi like', likes);
+function onLike (btnLike, index) {
+
+    if (btnLike.classList.contains('like-button--liked')) {
+
+        posts[index].likes -= 1;
+        btnLike.classList.remove("like-button--liked");
+
+    } else {
+
+        posts[index].likes += 1;
+        btnLike.classList.add("like-button--liked");
+
+    }
+
+    document.getElementById(`like-counter-${posts[index].id}`).innerHTML = posts[index].likes;
+
 }
