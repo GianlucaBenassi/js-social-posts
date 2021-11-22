@@ -71,10 +71,17 @@ for (let i = 0; i < posts.length; i++) {
 const btnLike = document.querySelectorAll('.js-like-button');
 
 for (let i = 0; i < btnLike.length; i++) {
+
+    const {id, likes} = posts[i];
+
     btnLike[i].addEventListener('click', function(event){
         event.preventDefault();
         
-    })
+        // call onLike function
+        onLike(id, likes);
+
+    });
+
 }
 
 
