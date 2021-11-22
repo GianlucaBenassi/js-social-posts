@@ -62,9 +62,17 @@ h1 {
     font-size: 0.8rem;
 }
 
-.profile-pic {
+.profile-pic,
+.profile-pic-null {
     border-radius: 50%;
     max-width: 60px;
+}
+
+.profile-pic-null {
+    color: white;
+    background-color: blue;
+    font-weight: bold;
+    padding: 15px 18px;
 }
 
 .profile-pic-default {

@@ -70,7 +70,7 @@ for (let i = 0; i < posts.length; i++) {
         event.preventDefault();
         alert('ciao');
     });
-    console.log(btnLike);
+    // console.log(btnLike);
 
 }
 
@@ -82,45 +82,88 @@ for (let i = 0; i < posts.length; i++) {
 function addPost(id, content, media, name, image, likes, created) {
 
     const postContainer = document.getElementById('container');
+    
+    if (image == null) {
 
-    postContainer.innerHTML += `
-    <div class="post">
+        postContainer.innerHTML += `
+        <div class="post">
 
-        <div class="post__header">
-            <div class="post-meta">                    
-                <div class="post-meta__icon">
-                    <img class="profile-pic" src="${image}" alt="${image}">                    
+            <div class="post__header">
+                <div class="post-meta">                    
+                    <div class="post-meta__icon">
+                        <p class="profile-pic-null">${name.match(/\b(\w)/g).join('')}</p>
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${name}</div>
+                        <div class="post-meta__time">${created}</div>
+                    </div>                    
                 </div>
-                <div class="post-meta__data">
-                    <div class="post-meta__author">${name}</div>
-                    <div class="post-meta__time">${created}</div>
-                </div>                    
             </div>
+
+            <div class="post__text">${content}</div>
+
+            <div class="post__image">
+                <img src="${media}" alt="${media}">
+            </div>
+
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button  js-like-button" href="#" data-postid="${id}">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b id="like-counter-${id}" class="js-likes-counter">${likes}</b> persone
+                    </div>
+                </div> 
+            </div>
+
         </div>
+        `;
 
-        <div class="post__text">${content}</div>
+    } else {
 
-        <div class="post__image">
-            <img src="${media}" alt="${media}">
-        </div>
+        postContainer.innerHTML += `
+        <div class="post">
 
-        <div class="post__footer">
-            <div class="likes js-likes">
-                <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="#" data-postid="${id}">
-                        <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                        <span class="like-button__label">Mi Piace</span>
-                    </a>
+            <div class="post__header">
+                <div class="post-meta">                    
+                    <div class="post-meta__icon">
+                        <img class="profile-pic" src="${image}" alt="${image}">
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${name}</div>
+                        <div class="post-meta__time">${created}</div>
+                    </div>                    
                 </div>
-                <div class="likes__counter">
-                    Piace a <b id="like-counter-${id}" class="js-likes-counter">${likes}</b> persone
-                </div>
-            </div> 
+            </div>
+
+            <div class="post__text">${content}</div>
+
+            <div class="post__image">
+                <img src="${media}" alt="${media}">
+            </div>
+
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button  js-like-button" href="#" data-postid="${id}">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b id="like-counter-${id}" class="js-likes-counter">${likes}</b> persone
+                    </div>
+                </div> 
+            </div>
+
         </div>
+        `;
 
-    </div>
-    `;
-
+    }
 }
 
 
