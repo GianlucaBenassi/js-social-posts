@@ -60,20 +60,28 @@ const posts = [
 for (let i = 0; i < posts.length; i++) {
 
     // destructuring posts
-    const {content, media, author: {name}, author: {image}, likes, created} = posts[i];
+    const {id, content, media, author: {name}, author: {image}, likes, created} = posts[i];
 
-    addPost(content, media, name, image, likes, created);
+    addPost(id, content, media, name, image, likes, created);
+
+    // QUESTA E' LA PARTE CHE NON FUNZIONA
+    const btnLike = document.querySelector(`[data-postid="${id}"]`);
+    btnLike.addEventListener('click', function(event) {
+        event.preventDefault();
+        alert('ciao');
+    });
+    console.log(btnLike);
+
 }
-
-
 
 
 // ***** functions
 
-function addPost(content, media, name, image, likes, created) {
+
+// create post structure
+function addPost(id, content, media, name, image, likes, created) {
 
     const postContainer = document.getElementById('container');
-
 
     postContainer.innerHTML += `
     <div class="post">
@@ -99,13 +107,13 @@ function addPost(content, media, name, image, likes, created) {
         <div class="post__footer">
             <div class="likes js-likes">
                 <div class="likes__cta">
-                    <a class="like-button  js-like-button" href="#" data-postid="1">
+                    <a class="like-button  js-like-button" href="#" data-postid="${id}">
                         <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                         <span class="like-button__label">Mi Piace</span>
                     </a>
                 </div>
                 <div class="likes__counter">
-                    Piace a <b id="like-counter-1" class="js-likes-counter">${likes}</b> persone
+                    Piace a <b id="like-counter-${id}" class="js-likes-counter">${likes}</b> persone
                 </div>
             </div> 
         </div>
@@ -113,4 +121,11 @@ function addPost(content, media, name, image, likes, created) {
     </div>
     `;
 
+}
+
+
+// increase/decrease like number
+
+function onLike (id, likes) {
+    console.log('hai premuto like sul post con id', id, 'e con questi like', likes);
 }
