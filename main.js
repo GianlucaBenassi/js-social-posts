@@ -57,6 +57,7 @@ const posts = [
 ];
 
 
+//add posts
 for (let i = 0; i < posts.length; i++) {
 
     // destructuring posts
@@ -64,15 +65,19 @@ for (let i = 0; i < posts.length; i++) {
 
     addPost(id, content, media, name, image, likes, created);
 
-    // QUESTA E' LA PARTE CHE NON FUNZIONA
-    const btnLike = document.querySelector(`[data-postid="${id}"]`);
-    btnLike.addEventListener('click', function(event) {
-        event.preventDefault();
-        alert('ciao');
-    });
-    // console.log(btnLike);
-
 }
+
+//add like click event
+const btnLike = document.querySelectorAll('.js-like-button');
+
+for (let i = 0; i < btnLike.length; i++) {
+    btnLike[i].addEventListener('click', function(event){
+        event.preventDefault();
+        
+    })
+}
+
+
 
 
 // ***** functions
@@ -90,8 +95,8 @@ function addPost(id, content, media, name, image, likes, created) {
 
             <div class="post__header">
                 <div class="post-meta">                    
-                    <div class="post-meta__icon">
-                        <p class="profile-pic-null">${name.match(/\b(\w)/g).join('')}</p>
+                    <div class="post-meta__icon profile-pic-default">
+                        <span>${name.match(/\b(\w)/g).join('')}</span>
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${name}</div>
