@@ -91,6 +91,10 @@ for (let i = 0; i < btnLike.length; i++) {
 // create post structure
 function addPost(id, content, media, name, image, likes, created) {
 
+    //convert date to dd/mm/yyyy
+    const convertedDate = convertDate(created);
+
+
     const postContainer = document.getElementById('container');
     
     if (image == null) {
@@ -105,7 +109,7 @@ function addPost(id, content, media, name, image, likes, created) {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${name}</div>
-                        <div class="post-meta__time">${created}</div>
+                        <div class="post-meta__time">${convertedDate}</div>
                     </div>                    
                 </div>
             </div>
@@ -145,7 +149,7 @@ function addPost(id, content, media, name, image, likes, created) {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${name}</div>
-                        <div class="post-meta__time">${created}</div>
+                        <div class="post-meta__time">${convertedDate}</div>
                     </div>                    
                 </div>
             </div>
@@ -194,5 +198,20 @@ function onLike (btnLike, index) {
     }
 
     document.getElementById(`like-counter-${posts[index].id}`).innerHTML = posts[index].likes;
+
+}
+
+
+
+// function convert date to dd/mm/yyyy
+function convertDate(d) {
+    
+    const createdDate = new Date(d);
+
+    const dd = String(createdDate.getDate()).padStart(2, '0');
+    const mm = String(createdDate.getMonth() + 1).padStart(2, '0');
+    const yyyy = createdDate.getFullYear();
+
+    return dd + '/' + mm + '/' + yyyy;
 
 }
